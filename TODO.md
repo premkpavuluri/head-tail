@@ -1,6 +1,6 @@
 **TODO:**
-- [ ] Make `head` to take options
 - [ ] Make `head` work for -c option
+- [ ] Make `head` to take options
 - [ ] Implement `head file`
 - [ ] Make `head` works for content instead of files
 

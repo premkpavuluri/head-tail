@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, getLines } = require('../src/headLib.js');
+const { head, getLines, charactersUpto } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
@@ -32,5 +32,21 @@ describe('getLines', () => {
 
   it('When lines are empty', () => {
     assert.deepStrictEqual(getLines('', 1), '');
+  });
+});
+
+describe('charactersUpto', () => {
+  it('Should give specified number of characters', () => {
+    assert.deepStrictEqual(charactersUpto('ab', 1), 'a');
+    assert.deepStrictEqual(charactersUpto('a\nc', 3), 'a\nc');
+  });
+
+  it('When content have empty characters', () => {
+    assert.deepStrictEqual(charactersUpto('a b', 2), 'a ');
+    assert.deepStrictEqual(charactersUpto(' ', 1), ' ');
+  });
+
+  it('When given limit is more than no of characters', () => {
+    assert.deepStrictEqual(charactersUpto('ab', 3), 'ab');
   });
 });
