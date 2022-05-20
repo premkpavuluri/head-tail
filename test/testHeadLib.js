@@ -12,4 +12,10 @@ describe('head', () => {
     assert.deepStrictEqual(head(['hello', 'bye', 'ok']),
       ['hello', 'bye', 'ok']);
   });
+
+  it('should give 10 lines if lines are more than 10', () => {
+    const lines = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'];
+    const expectedLines = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+    assert.deepStrictEqual(head(lines), expectedLines);
+  });
 });
