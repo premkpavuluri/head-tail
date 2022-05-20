@@ -9,6 +9,7 @@
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Refactor `head`
 - [x] Make `head` works for content instead of files
 - [x] Make `head` to take options
 - [x] Make `head` work for -c option

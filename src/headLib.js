@@ -7,8 +7,9 @@ const lines = (content, count) => {
 };
 
 const head = (option, content) => {
-  if (isFinite(option.count)) {
-    return lines(content, option.count);
+  const count = option.count;
+  if (count) {
+    return lines(content, count);
   }
 
   return charactersUpto(content, option.bytes);
