@@ -6,11 +6,12 @@ const getLines = (lines, count) => {
   return lines.filter((line, index) => index < linesCount);
 };
 
-const head = (lines) => {
+const head = (content) => {
+  const lines = content.split('\n');
   const defaultCount = 10;
   const filteredLines = getLines(lines, defaultCount);
 
-  return filteredLines;
+  return filteredLines.join('\n');
 };
 
 exports.head = head;

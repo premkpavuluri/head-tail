@@ -2,11 +2,12 @@
 - [ ] Make `head` work for count option (-n)
 - [ ] Make `head` works for content instead of files
 - [ ] Make `head` work without any options
+- [ ] Extract `split`, `join` into new function
 
 **MAY BE:**
-- [ ] Make `head` to take content
 
 **DONE:**
+- [x] Make `head` to take content
 - [x] Test `getLines` function
 - [x] Refactor `head` function
 - [x] Extract `lines` functionality from `head`
