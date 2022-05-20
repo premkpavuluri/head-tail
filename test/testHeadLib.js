@@ -29,4 +29,8 @@ describe('getLines', () => {
   it('Should return all lines if count is greater than lines', () => {
     assert.deepStrictEqual(getLines(['a', 'b'], 3), ['a', 'b']);
   });
+
+  it('When lines are empty', () => {
+    assert.deepStrictEqual(getLines([], 1), []);
+  });
 });

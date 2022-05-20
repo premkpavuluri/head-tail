@@ -4,7 +4,7 @@ const min = (number1, number2) => Math.min(number1, number2);
 
 const getLines = (lines, count) => {
   const linesCount = min(count, lines.length);
-  return lines.filter((line, index) => index < linesCount);
+  return lines.slice(0, linesCount);
 };
 
 const head = (content) => {

@@ -7,6 +7,7 @@
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Refactor `getLines`
 - [x] Make `head` work without any options
 - [x] Extract `split`, `join` into new functions and into new file
 - [x] Make `head` to take content
