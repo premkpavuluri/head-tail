@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, getLines, charactersUpto } = require('../src/headLib.js');
+const { head, lines, charactersUpto } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
@@ -16,22 +16,28 @@ describe('head', () => {
   it('should give 10 lines if lines are more than 10', () => {
     const lines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
     const expectedLines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
+
     assert.deepStrictEqual(head({ count: 10 }, lines), expectedLines);
+  });
+
+  it('Should give specified number of bytes', () => {
+    assert.deepStrictEqual(head({ bytes: 1 }, 'ab'), 'a');
+    assert.deepStrictEqual(head({ bytes: 2 }, 'a\nc'), 'a\n');
   });
 });
 
-describe('getLines', () => {
+describe('lines', () => {
   it('Should return given number of lines', () => {
-    assert.deepStrictEqual(getLines('h\ni', 1), 'h');
-    assert.deepStrictEqual(getLines('h\ni', 2), 'h\ni');
+    assert.deepStrictEqual(lines('h\ni', 1), 'h');
+    assert.deepStrictEqual(lines('h\ni', 2), 'h\ni');
   });
 
   it('Should return all lines if count is greater than lines', () => {
-    assert.deepStrictEqual(getLines('a\nb', 3), 'a\nb');
+    assert.deepStrictEqual(lines('a\nb', 3), 'a\nb');
   });
 
   it('When lines are empty', () => {
-    assert.deepStrictEqual(getLines('', 1), '');
+    assert.deepStrictEqual(lines('', 1), '');
   });
 });
 

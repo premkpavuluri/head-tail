@@ -1,16 +1,19 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 
-const getLines = (content, count) => {
-  const lines = splitLines(content);
-  return joinLines(lines.slice(0, count));
+const charactersUpto = (content, limit) => content.slice(0, limit);
+const lines = (content, count) => {
+  const splitedLines = splitLines(content);
+  return joinLines(splitedLines.slice(0, count));
 };
 
-const charactersUpto = (content, limit) => content.slice(0, limit);
-
 const head = (option, content) => {
-  return getLines(content, option.count);
+  if (isFinite(option.count)) {
+    return lines(content, option.count);
+  }
+
+  return charactersUpto(content, option.bytes);
 };
 
 exports.head = head;
-exports.getLines = getLines;
+exports.lines = lines;
 exports.charactersUpto = charactersUpto;

@@ -1,13 +1,17 @@
 **TODO:**
-- [ ] Make `head` work for -c option
-- [ ] Make `head` to take options
 - [ ] Implement `head file`
-- [ ] Make `head` works for content instead of files
+- [ ] Implement `headMain`
+- [ ] Take the input from command line
+- [ ] Implement parser for user input
+- [ ] Implement for multiple files `head options file...`
 
 **MAY BE:**
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Make `head` works for content instead of files
+- [x] Make `head` to take options
+- [x] Make `head` work for -c option
 - [x] Consider getLines takes content and count and give back specified lines.
 - [x] Consider options structure for `head`
 - [x] Change the inputs order of `head`
