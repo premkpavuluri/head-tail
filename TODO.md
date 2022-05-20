@@ -1,11 +1,16 @@
 **TODO:**
-- [ ] Make `head` works for content instead of files
 - [ ] Make `head` to take options
+- [ ] Make `head` work for -c option
+- [ ] Implement `head file`
+- [ ] Make `head` works for content instead of files
 
 **MAY BE:**
+- [ ] Consider getLines takes content and count and give back specified lines.
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Consider options structure for `head`
+- [x] Change the inputs order of `head`
 - [x] Make `head` work for count option (-n)
 - [x] Refactor `getLines`
 - [x] Make `head` work without any options
