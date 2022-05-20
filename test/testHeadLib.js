@@ -3,20 +3,20 @@ const { head, getLines } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
-    assert.deepStrictEqual(head('hello'), 'hello');
-    assert.deepStrictEqual(head('ok'), 'ok');
+    assert.deepStrictEqual(head('hello', 10), 'hello');
+    assert.deepStrictEqual(head('ok', 10), 'ok');
   });
 
   it('Should give multiple lines', () => {
-    assert.deepStrictEqual(head('hello\nbye'), 'hello\nbye');
-    assert.deepStrictEqual(head('hello\nbye\nok'),
+    assert.deepStrictEqual(head('hello\nbye', 10), 'hello\nbye');
+    assert.deepStrictEqual(head('hello\nbye\nok', 10),
       'hello\nbye\nok');
   });
 
   it('should give 10 lines if lines are more than 10', () => {
     const lines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
     const expectedLines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
-    assert.deepStrictEqual(head(lines), expectedLines);
+    assert.deepStrictEqual(head(lines, 10), expectedLines);
   });
 });
 

@@ -1,5 +1,4 @@
 **TODO:**
-- [ ] Make `head` work for count option (-n)
 - [ ] Make `head` works for content instead of files
 - [ ] Make `head` to take options
 
@@ -7,6 +6,7 @@
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Make `head` work for count option (-n)
 - [x] Refactor `getLines`
 - [x] Make `head` work without any options
 - [x] Extract `split`, `join` into new functions and into new file
