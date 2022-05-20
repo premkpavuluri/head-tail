@@ -1,12 +1,12 @@
 const { splitLines, joinLines } = require('./stringUtils.js');
 
-const getLines = (lines, count) => lines.slice(0, count);
+const getLines = (content, count) => {
+  const lines = splitLines(content);
+  return joinLines(lines.slice(0, count));
+};
 
 const head = (option, content) => {
-  const lines = splitLines(content);
-  const filteredLines = getLines(lines, option.count);
-
-  return joinLines(filteredLines);
+  return getLines(content, option.count);
 };
 
 exports.head = head;

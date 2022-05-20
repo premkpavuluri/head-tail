@@ -22,15 +22,15 @@ describe('head', () => {
 
 describe('getLines', () => {
   it('Should return given number of lines', () => {
-    assert.deepStrictEqual(getLines(['h', 'i'], 1), ['h']);
-    assert.deepStrictEqual(getLines(['h', 'i'], 2), ['h', 'i']);
+    assert.deepStrictEqual(getLines('h\ni', 1), 'h');
+    assert.deepStrictEqual(getLines('h\ni', 2), 'h\ni');
   });
 
   it('Should return all lines if count is greater than lines', () => {
-    assert.deepStrictEqual(getLines(['a', 'b'], 3), ['a', 'b']);
+    assert.deepStrictEqual(getLines('a\nb', 3), 'a\nb');
   });
 
   it('When lines are empty', () => {
-    assert.deepStrictEqual(getLines([], 1), []);
+    assert.deepStrictEqual(getLines('', 1), '');
   });
 });

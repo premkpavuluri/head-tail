@@ -5,10 +5,10 @@
 - [ ] Make `head` works for content instead of files
 
 **MAY BE:**
-- [ ] Consider getLines takes content and count and give back specified lines.
 - [ ] Move lines functionality into another file
 
 **DONE:**
+- [x] Consider getLines takes content and count and give back specified lines.
 - [x] Consider options structure for `head`
 - [x] Change the inputs order of `head`
 - [x] Make `head` work for count option (-n)
