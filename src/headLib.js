@@ -1,3 +1,3 @@
-const head = (content) => content;
+const head = (lines) => lines;
 
 exports.head = head;
