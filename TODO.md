@@ -3,6 +3,10 @@
 - [ ] Implement `headMain`
 - [ ] Take the input from command line
 - [ ] Implement parser for user input
+  - [x] single file
+  - [ ] single option
+  - [ ] multiple options(Invalid)
+  - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
 
 **MAY BE:**
