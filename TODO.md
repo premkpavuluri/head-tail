@@ -5,13 +5,13 @@
   - [x] multiple options(same option multiple times, Invalid)
   - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
-- [ ] file validation in headMain
 
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] file validation in headMain
 - [x] Change the contract of `head` function
 - [x] Change return structure of parser
 - [x] Take the input from command line

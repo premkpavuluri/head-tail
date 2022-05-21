@@ -29,9 +29,13 @@ describe('parseArgs', () => {
 
   it('Should throw error when both options are given', () => {
     const args = ['-n', '1', '-c', '2', 'a'];
-    assert.throws(() => parseArgs(args), {
+    const error = {
       'name': 'Invalid syntax',
       'message': 'can not combine line and byte counts'
-    });
+    };
+    assert.throws(() => parseArgs(args), error);
+
+    const args2 = ['-c', '1', '-n', '1', 'a'];
+    assert.throws(() => parseArgs(args2), error);
   });
 });

@@ -32,4 +32,15 @@ describe('headMain', () => {
 
     assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'h');
   });
+
+  it('Should throw error when file is not found', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'hi');
+    const args = ['-n', '1', 'not.txt'];
+    const error = {
+      name: 'FileReadError',
+      message: 'Can not read not.txt'
+    };
+
+    assert.throws(() => headMain(mockedReadFile, ...args), error);
+  });
 });

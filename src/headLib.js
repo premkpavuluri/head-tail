@@ -17,7 +17,17 @@ const head = ({ option, value }, content) => {
 
 const headMain = function (readFile, ...args) {
   const { fileName, options } = parseArgs(args);
-  const content = readFile(fileName, 'utf8');
+  let content = '';
+
+  try {
+    content = readFile(fileName, 'utf8');
+  } catch (error) {
+    throw {
+      name: 'FileReadError',
+      message: `Can not read ${fileName}`
+    };
+  }
+
   return head(options, content);
 };
 
