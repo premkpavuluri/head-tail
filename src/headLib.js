@@ -6,13 +6,12 @@ const lines = (content, count) => {
   return joinLines(splitedLines.slice(0, count));
 };
 
-const head = (option, content) => {
-  const count = option.count;
+const head = ({ count, bytes }, content) => {
   if (count) {
     return lines(content, count);
   }
 
-  return charactersUpto(content, option.bytes);
+  return charactersUpto(content, bytes);
 };
 
 const headMain = function (readFile, ...args) {

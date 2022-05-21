@@ -6,9 +6,9 @@
 - [ ] Implement for multiple files `head options file...`
 
 **MAY BE:**
-- [ ] Seperate test files
 
 **DONE:**
+- [x] Seperate test files
 - [x] ~~ Move lines functionality into another file ~~
 - [x] Refactor `head`
 - [x] Make `head` works for content instead of files
