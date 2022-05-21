@@ -9,6 +9,12 @@ const validateOption = function (oldOption, newOption) {
     };
   }
 
+  if (!isFinite(newOption.value)) {
+    throw {
+      message: `head: illegal ${newOption.option} count`
+    };
+  }
+
   return newOption;
 };
 

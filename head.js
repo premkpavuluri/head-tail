@@ -5,7 +5,7 @@ const main = function () {
   try {
     console.log(headMain(fs.readFileSync, ...process.argv.slice(2)));
   } catch (error) {
-    console.error('usage: head [-n lines | -c bytes] [file ...]');
+    console.error(error.message);
   }
 };
 

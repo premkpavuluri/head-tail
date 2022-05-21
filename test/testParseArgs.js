@@ -50,4 +50,15 @@ describe('parseArgs', () => {
       'fileNames': ['a', 'b']
     });
   });
+
+  it('Should throw error when option value is not valid', () => {
+    const countError = {
+      message: 'head: illegal count count'
+    };
+    const byteError = {
+      message: 'head: illegal bytes count'
+    };
+    assert.throws(() => parseArgs(['-n', 'a', 'b']), countError);
+    assert.throws(() => parseArgs(['-c', 'a', 'b']), byteError);
+  });
 });
