@@ -1,16 +1,19 @@
 **TODO:**
-- [ ] Implement parser for user input
-  - [x] single file
-  - [x] single option
-  - [x] multiple options(same option multiple times, Invalid)
-  - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
-
+- [ ] Implement try catch in `head.js`
+- [ ] Implement head for `--help`
+- [ ] Implement parser for non-space options `-n1,-c1,-1`
+- [ ] Test `validateOptions` function
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] Implement parser for user input
+  - [x] single file
+  - [x] single option
+  - [x] multiple options(same option multiple times, Invalid)
+  - [x] multiple files
 - [x] file validation in headMain
 - [x] Change the contract of `head` function
 - [x] Change return structure of parser

@@ -16,15 +16,15 @@ const head = ({ option, value }, content) => {
 };
 
 const headMain = function (readFile, ...args) {
-  const { fileName, options } = parseArgs(args);
+  const { fileNames, options } = parseArgs(args);
   let content = '';
 
   try {
-    content = readFile(fileName, 'utf8');
+    content = readFile(fileNames[0], 'utf8');
   } catch (error) {
     throw {
       name: 'FileReadError',
-      message: `Can not read ${fileName}`
+      message: `Can not read ${fileNames[0]}`
     };
   }
 

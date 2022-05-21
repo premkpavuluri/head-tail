@@ -6,7 +6,7 @@ const validateOption = function (oldOption, newOption) {
     throw {
       name: 'Invalid syntax',
       message: 'can not combine line and byte counts'
-    }
+    };
   }
 
   return newOption;
@@ -26,7 +26,7 @@ const parseArgs = function (args) {
     parsedArgs.options = parsedOption;
   }
 
-  parsedArgs.fileName = args[index];
+  parsedArgs.fileNames = args.slice(index);
   return parsedArgs;
 };
 
