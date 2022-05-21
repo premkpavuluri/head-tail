@@ -1,7 +1,5 @@
 **TODO:**
 - [ ] Implement for multiple files `head options file...`
-- [ ] Implement try catch in `head.js`
-- [ ] Implement head for `--help`
 - [ ] Implement parser for non-space options `-n1,-c1,-1`
 - [ ] Test `validateOptions` function
 
@@ -9,6 +7,8 @@
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] Implement head for `--help`
+- [x] Implement try catch in `head.js`
 - [x] Implement parser for user input
   - [x] single file
   - [x] single option

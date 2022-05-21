@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-const isOption = (option) => /^-.$/.test(option);
+const isOption = (option) => ['-c', '-n'].includes(option);
 
 const validateOption = function (oldOption, newOption) {
   if (oldOption.option !== newOption.option && oldOption.option !== undefined) {
