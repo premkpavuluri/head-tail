@@ -2,10 +2,12 @@
 - [ ] Implement parser for user input
   - [x] single file
   - [x] single option
-  - [ ] multiple options(Invalid)
+  - [ ] multiple options(same option multiple times, Invalid)
   - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
-- [ ] file validation
+- [ ] file validation in headMain
+- [x] Change return structure of parser
+- [x] Change the contract of `head` function
 
 **MAY BE:**
 

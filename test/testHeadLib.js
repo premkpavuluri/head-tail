@@ -3,13 +3,17 @@ const { head, lines, charactersUpto, } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
-    assert.deepStrictEqual(head({ count: 10 }, 'hello'), 'hello');
-    assert.deepStrictEqual(head({ count: 10 }, 'ok'), 'ok');
+    assert.deepStrictEqual(head({ 'option': 'count', 'value:': 10 },
+      'hello'), 'hello');
+    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+      'ok'), 'ok');
   });
 
   it('Should give multiple lines', () => {
-    assert.deepStrictEqual(head({ count: 10 }, 'hello\nbye'), 'hello\nbye');
-    assert.deepStrictEqual(head({ count: 10 }, 'hello\nbye\nok'),
+    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+      'hello\nbye'), 'hello\nbye');
+    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+      'hello\nbye\nok'),
       'hello\nbye\nok');
   });
 
@@ -17,12 +21,14 @@ describe('head', () => {
     const lines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
     const expectedLines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
 
-    assert.deepStrictEqual(head({ count: 10 }, lines), expectedLines);
+    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+      lines), expectedLines);
   });
 
   it('Should give specified number of bytes', () => {
-    assert.deepStrictEqual(head({ bytes: 1 }, 'ab'), 'a');
-    assert.deepStrictEqual(head({ bytes: 2 }, 'a\nc'), 'a\n');
+    assert.deepStrictEqual(head({ 'option': 'bytes', 'value': 1 }, 'ab'), 'a');
+    assert.deepStrictEqual(head({ 'option': 'bytes', 'value': 2 },
+      'a\nc'), 'a\n');
   });
 });
 

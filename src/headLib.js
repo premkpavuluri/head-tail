@@ -7,16 +7,16 @@ const lines = (content, count) => {
   return joinLines(splitedLines.slice(0, count));
 };
 
-const head = ({ count, bytes }, content) => {
-  if (count) {
-    return lines(content, count);
+const head = ({ option, value }, content) => {
+  if (option === 'count') {
+    return lines(content, value);
   }
 
-  return charactersUpto(content, bytes);
+  return charactersUpto(content, value);
 };
 
 const headMain = function (readFile, ...args) {
-  const { fileName, ...options } = parseArgs(args);
+  const { fileName, options } = parseArgs(args);
   const content = readFile(fileName, 'utf8');
   return head(options, content);
 };
