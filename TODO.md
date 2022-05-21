@@ -12,6 +12,7 @@
 **MAY BE:**
 
 **DONE:**
+- [x] Link `parseArgs` and `head`
 - [x] Seperate test files
 - [x] ~~ Move lines functionality into another file ~~
 - [x] Refactor `head`
