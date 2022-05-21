@@ -1,23 +1,33 @@
 /* eslint-disable max-statements */
 const isOption = (option) => /^-.$/.test(option);
 
-const parseArgs = function (args) {
-  if (!isOption(args[0])) {
-    return { fileName: args[0], options: { 'option': 'count', 'value': 10 } };
+const validateOption = function (oldOption, newOption) {
+  if (oldOption.option !== newOption.option && oldOption.option !== undefined) {
+    throw {
+      name: 'Invalid syntax',
+      message: 'can not combine line and byte counts'
+    }
   }
 
+  return newOption;
+};
+
+const parseArgs = function (args) {
+  const parsedArgs = { options: { 'option': 'count', 'value': 10 } };
   const keys = { '-n': 'count', '-c': 'bytes' };
-  const optionsSet = {};
+
   let index = 0;
+  let parsedOption = {};
   while (index < args.length && isOption(args[index])) {
     const option = keys[args[index]];
-    optionsSet['options'] = { option, 'value': +args[index + 1] };
+    parsedOption = validateOption(parsedOption,
+      { option, 'value': +args[index + 1] });
     index += 2;
+    parsedArgs.options = parsedOption;
   }
 
-  optionsSet.fileName = args[index];
-
-  return optionsSet;
+  parsedArgs.fileName = args[index];
+  return parsedArgs;
 };
 
 exports.parseArgs = parseArgs;

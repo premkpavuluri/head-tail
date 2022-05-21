@@ -22,8 +22,16 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(args),
       { 'options': { 'option': 'count', 'value': 3 }, 'fileName': 'a' });
 
-    const args2 = ['-c', '1', '-c', '3', 'a']
+    const args2 = ['-c', '1', '-c', '3', 'a'];
     assert.deepStrictEqual(parseArgs(args2),
       { 'options': { 'option': 'bytes', 'value': 3 }, 'fileName': 'a' });
+  });
+
+  it('Should throw error when both options are given', () => {
+    const args = ['-n', '1', '-c', '2', 'a'];
+    assert.throws(() => parseArgs(args), {
+      'name': 'Invalid syntax',
+      'message': 'can not combine line and byte counts'
+    });
   });
 });
