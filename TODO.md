@@ -6,12 +6,14 @@
   - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
 - [ ] file validation in headMain
-- [x] Change return structure of parser
-- [x] Change the contract of `head` function
+- [ ] Extract parseOptions from parseArgs
+
 
 **MAY BE:**
 
 **DONE:**
+- [x] Change the contract of `head` function
+- [x] Change return structure of parser
 - [x] Take the input from command line
 - [x] Implement `headMain`
 - [x] Implement `head file`

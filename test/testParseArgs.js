@@ -16,4 +16,14 @@ describe('parseArgs', () => {
     assert.deepStrictEqual(parseArgs(['-c', '2', 'b']),
       { 'options': { 'option': 'bytes', 'value': 2 }, 'fileName': 'b' });
   });
+
+  it('When same option is repeating', () => {
+    const args = ['-n', '1', '-n', '3', 'a'];
+    assert.deepStrictEqual(parseArgs(args),
+      { 'options': { 'option': 'count', 'value': 3 }, 'fileName': 'a' });
+
+    const args2 = ['-c', '1', '-c', '3', 'a']
+    assert.deepStrictEqual(parseArgs(args2),
+      { 'options': { 'option': 'bytes', 'value': 3 }, 'fileName': 'a' });
+  });
 });
