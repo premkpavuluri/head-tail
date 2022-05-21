@@ -25,4 +25,11 @@ describe('headMain', () => {
 
     assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'hello\nhi');
   });
+
+  it('Should give specified number of bytes', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'hii');
+    const args = ['-c', '1', 'a.txt'];
+
+    assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'h');
+  });
 });

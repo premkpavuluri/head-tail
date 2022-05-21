@@ -1,17 +1,18 @@
 **TODO:**
-- [ ] Implement `head file`
-- [ ] Implement `headMain`
-- [ ] Take the input from command line
 - [ ] Implement parser for user input
   - [x] single file
   - [x] single option
   - [ ] multiple options(Invalid)
   - [ ] multiple files
 - [ ] Implement for multiple files `head options file...`
+- [ ] file validation
 
 **MAY BE:**
 
 **DONE:**
+- [x] Take the input from command line
+- [x] Implement `headMain`
+- [x] Implement `head file`
 - [x] Link `parseArgs` and `head`
 - [x] Seperate test files
 - [x] ~~ Move lines functionality into another file ~~
