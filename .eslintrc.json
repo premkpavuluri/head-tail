@@ -112,6 +112,15 @@
       "rules": {
         "no-console": "off"
       }
+    },
+    {
+      "files": [
+        "parseArgs.js"
+      ],
+      "rules": {
+        "no-console": "off",
+        "max-statements": "off"
+      }
     }
   ]
 }

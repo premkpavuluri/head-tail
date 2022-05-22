@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 const isOption = (option) => /^-[a-z]/.test(option);
 const isObjectEmpty = object => Object.keys(object).length === 0;
 
@@ -8,7 +7,7 @@ const throwIfIllegal = (option) => {
   }
 };
 
-const throwIfSame = (oldOption, newOption) => {
+const throwIfNotSame = (oldOption, newOption) => {
   if (oldOption.option !== newOption.option && !isObjectEmpty(oldOption)) {
     throw { message: 'can not combine line and byte counts' };
   }
@@ -22,7 +21,7 @@ const throwIfInvalidValue = (option) => {
 
 const validateOption = function (oldOption, newOption) {
   throwIfIllegal(newOption.option);
-  throwIfSame(oldOption, newOption);
+  throwIfNotSame(oldOption, newOption);
   throwIfInvalidValue(newOption);
 
   return newOption;
@@ -51,3 +50,4 @@ const parseArgs = function (args) {
 };
 
 exports.parseArgs = parseArgs;
+exports.validateOption = validateOption;

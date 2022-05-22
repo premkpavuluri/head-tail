@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs } = require('../src/parseArgs.js');
+const { parseArgs, validateOption } = require('../src/parseArgs.js');
 
 describe('parseArgs', () => {
   it('Should return default count and fileName when file is given', () => {
@@ -68,5 +68,43 @@ describe('parseArgs', () => {
 
     assert.throws(() => parseArgs(['-a', 'a', 'b']), error);
     assert.throws(() => parseArgs(['-p', 'a', 'b']), error);
+  });
+});
+
+describe('validateOption', () => {
+  it('Should return new option if it is valid', () => {
+    const option1 = { 'option': 'count', 'value': 10 };
+    const option2 = { 'option': 'count', 'value': 1 };
+
+    assert.deepStrictEqual(validateOption(option1, option2), option2);
+  });
+
+  it('Should throw error if option is not valid', () => {
+    const error = { message: 'head: illegal option' };
+    const option1 = { 'option': 'count', 'value': 10 };
+    const option2 = { 'option': 'new', 'value': 1 };
+
+    assert.throws(() => validateOption(option1, option2), error);
+
+  });
+
+  it('Should throw error if both options are present', () => {
+    const error = { message: 'can not combine line and byte counts' };
+    const option1 = { 'option': 'count', 'value': 10 };
+    const option2 = { 'option': 'bytes', 'value': 1 };
+
+    assert.throws(() => validateOption(option1, option2), error);
+  });
+
+  it('Should throw error if value is invalid', () => {
+    const countError = { message: 'head: illegal count count' };
+    const bytesError = { message: 'head: illegal bytes count' };
+    const countOption1 = { 'option': 'count', 'value': 10 };
+    const countOption2 = { 'option': 'count', 'value': NaN };
+    const bytesOption1 = { 'option': 'bytes', 'value': 10 };
+    const bytesOption2 = { 'option': 'bytes', 'value': NaN };
+
+    assert.throws(() => validateOption(countOption1, countOption2), countError);
+    assert.throws(() => validateOption(bytesOption1, bytesOption2), bytesError);
   });
 });
