@@ -1,14 +1,29 @@
 /* eslint-disable max-statements */
-const isOption = (option) => ['-c', '-n'].includes(option);
+const isOption = (option) => /^-[a-z]/.test(option);
+const isObjectEmpty = object => Object.keys(object).length === 0;
 
-const validateOption = function (oldOption, newOption) {
-  if (oldOption.option !== newOption.option && oldOption.option !== undefined) {
+const throwIfIllegal = (option) => {
+  if (!['bytes', 'count'].includes(option)) {
+    throw { message: 'head: illegal option' };
+  }
+};
+
+const throwIfSame = (oldOption, newOption) => {
+  if (oldOption.option !== newOption.option && !isObjectEmpty(oldOption)) {
     throw { message: 'can not combine line and byte counts' };
   }
+};
 
-  if (!isFinite(newOption.value)) {
-    throw { message: `head: illegal ${newOption.option} count` };
+const throwIfInvalidValue = (option) => {
+  if (!isFinite(option.value)) {
+    throw { message: `head: illegal ${option.option} count` };
   }
+};
+
+const validateOption = function (oldOption, newOption) {
+  throwIfIllegal(newOption.option);
+  throwIfSame(oldOption, newOption);
+  throwIfInvalidValue(newOption);
 
   return newOption;
 };

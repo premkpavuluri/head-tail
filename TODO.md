@@ -2,15 +2,16 @@
 - [ ] Implement for multiple files `head options file...`
 - [ ] Implement parser for non-space options `-n1,-c1,-1`
 - [ ] Test `validateOptions` function
-- [ ] Refactor `parseArgs`
 - [ ] Validate args before parsing
   - [ ] arrange the options
   - [ ] validate options(like:both present,invalid,invalid value )
+- [ ] change option name `count` to `lines`
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] Refactor `parseArgs`
 - [x] Implement head for `--help`
 - [x] Implement try catch in `head.js`
 - [x] Implement parser for user input

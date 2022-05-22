@@ -60,4 +60,13 @@ describe('parseArgs', () => {
     assert.throws(() => parseArgs(['-n', 'a', 'b']), countError);
     assert.throws(() => parseArgs(['-c', 'a', 'b']), byteError);
   });
+
+  it('Should throw error when option is not valid', () => {
+    const error = {
+      message: 'head: illegal option'
+    };
+
+    assert.throws(() => parseArgs(['-a', 'a', 'b']), error);
+    assert.throws(() => parseArgs(['-p', 'a', 'b']), error);
+  });
 });
