@@ -10,6 +10,7 @@
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] handle --help
 - [x] Test `validateOptions` function
 - [x] Refactor `parseArgs`
 - [x] Implement head for `--help`

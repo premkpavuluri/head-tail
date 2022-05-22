@@ -43,4 +43,36 @@ describe('headMain', () => {
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);
   });
+
+  it('Should throw error if option is invalid', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'hi');
+    const args1 = ['--help', '1', 'a.txt'];
+    const args2 = ['-a', '1', 'a.txt'];
+    const error = {
+      message: 'head: illegal option'
+    };
+
+    assert.throws(() => headMain(mockedReadFile, ...args1), error);
+    assert.throws(() => headMain(mockedReadFile, ...args2), error);
+  });
+
+  it('Should throw error if both options are specified', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'hi');
+    const args = ['-n', '1', '-c', '1', 'a.txt'];
+    const error = {
+      message: 'can not combine line and byte counts'
+    };
+
+    assert.throws(() => headMain(mockedReadFile, ...args), error);
+  });
+
+  it('Should throw error if option value is valid', () => {
+    const mockedReadFile = mockReadFile('a.txt', 'hi');
+    const args = ['-n', 'a', 'a.txt'];
+    const error = {
+      message: 'head: illegal count count'
+    };
+
+    assert.throws(() => headMain(mockedReadFile, ...args), error);
+  });
 });

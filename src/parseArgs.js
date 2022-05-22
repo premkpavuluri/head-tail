@@ -1,4 +1,4 @@
-const isOption = (option) => /^-[a-z]/.test(option);
+const isOption = (option) => /^-[a-z-]/.test(option);
 const isObjectEmpty = object => Object.keys(object).length === 0;
 
 const throwIfIllegal = (option) => {
