@@ -2,6 +2,10 @@
 - [ ] Implement for multiple files `head options file...`
 - [ ] Implement parser for non-space options `-n1,-c1,-1`
 - [ ] Test `validateOptions` function
+- [ ] Refactor `parseArgs`
+- [ ] Validate args before parsing
+  - [ ] arrange the options
+  - [ ] validate options(like:both present,invalid,invalid value )
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
