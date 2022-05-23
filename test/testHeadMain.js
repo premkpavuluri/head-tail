@@ -93,7 +93,8 @@ describe('headMain', () => {
       { fileName: 'b.txt', content: 'bye' }];
     const mockedReadFiles = mockReadFiles(filesSet);
     const args = ['-n', '1', 'a.txt', 'b.txt'];
+    const contents = '==>a.txt<==\nhello\n==>b.txt<==\nbye';
 
-    assert.deepStrictEqual(headMain(mockedReadFiles, ...args), 'hello\nbye');
+    assert.deepStrictEqual(headMain(mockedReadFiles, ...args), contents);
   });
 });

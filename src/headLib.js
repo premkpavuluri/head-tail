@@ -1,5 +1,6 @@
 const { parseArgs } = require('./parseArgs.js');
 const { splitLines, joinLines } = require('./stringUtils.js');
+const { format } = require('./formatter.js');
 
 const charactersUpto = (content, limit) => content.slice(0, limit);
 const lines = (content, count) => {
@@ -29,9 +30,11 @@ const headMain = function (readFile, ...args) {
     }
   });
 
-  return contents.map((content) => {
+  const headContents = contents.map((content) => {
     return head(options, content);
-  }).join('\n');
+  });
+
+  return format(fileNames, headContents);
 };
 
 exports.head = head;

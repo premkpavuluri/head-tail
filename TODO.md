@@ -1,16 +1,17 @@
 **TODO:**
-- [x] Implement for multiple files `head options file...`
-  - [ ] Implement formatter for multiple files
 - [ ] Implement parser for non-space options `-n1,-c1,-1`
 - [ ] Validate args before parsing
   - [ ] arrange the options
   - [ ] validate options(like:both present,invalid,invalid value )
 - [ ] change option name `count` to `lines`
+- [ ] check if option value is 0 or not.
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] Implement for multiple files `head options file...`
+  - [x] Implement formatter for multiple files
 - [x] handle --help
 - [x] Test `validateOptions` function
 - [x] Refactor `parseArgs`
