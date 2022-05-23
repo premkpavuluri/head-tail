@@ -1,5 +1,6 @@
 **TODO:**
-- [ ] Implement for multiple files `head options file...`
+- [x] Implement for multiple files `head options file...`
+  - [ ] Implement formatter for multiple files
 - [ ] Implement parser for non-space options `-n1,-c1,-1`
 - [ ] Validate args before parsing
   - [ ] arrange the options

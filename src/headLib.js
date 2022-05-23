@@ -17,18 +17,21 @@ const head = ({ option, value }, content) => {
 
 const headMain = function (readFile, ...args) {
   const { fileNames, options } = parseArgs(args);
-  let content = '';
 
-  try {
-    content = readFile(fileNames[0], 'utf8');
-  } catch (error) {
-    throw {
-      name: 'FileReadError',
-      message: `Can not read ${fileNames[0]}`
-    };
-  }
+  const contents = fileNames.map((fileName) => {
+    try {
+      return readFile(fileName, 'utf8');
+    } catch (error) {
+      throw {
+        name: 'FileReadError',
+        message: `head: ${fileName}: No such file or directory`
+      };
+    }
+  });
 
-  return head(options, content);
+  return contents.map((content) => {
+    return head(options, content);
+  }).join('\n');
 };
 
 exports.head = head;

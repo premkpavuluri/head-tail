@@ -9,6 +9,17 @@ const mockReadFile = function (mockFile, content) {
   };
 };
 
+const mockReadFiles = function (fileContents) {
+  let index = 0;
+  return function (fileName, encoding) {
+    const file = fileContents[index];
+    assert.equal(fileName, file.fileName);
+    assert.equal(encoding, 'utf8');
+    index++;
+    return file.content;
+  };
+};
+
 describe('headMain', () => {
   it('Should give specified number of lines', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hello');
@@ -38,7 +49,7 @@ describe('headMain', () => {
     const args = ['-n', '1', 'not.txt'];
     const error = {
       name: 'FileReadError',
-      message: 'Can not read not.txt'
+      message: 'head: not.txt: No such file or directory'
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);
@@ -74,5 +85,15 @@ describe('headMain', () => {
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);
+  });
+
+  it('Should give head content of multiple files', () => {
+    const filesSet = [
+      { fileName: 'a.txt', content: 'hello' },
+      { fileName: 'b.txt', content: 'bye' }];
+    const mockedReadFiles = mockReadFiles(filesSet);
+    const args = ['-n', '1', 'a.txt', 'b.txt'];
+
+    assert.deepStrictEqual(headMain(mockedReadFiles, ...args), 'hello\nbye');
   });
 });
