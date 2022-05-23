@@ -59,12 +59,16 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args1 = ['--help', '1', 'a.txt'];
     const args2 = ['-a', '1', 'a.txt'];
-    const error = {
-      message: 'head: illegal option'
+    const error1 = {
+      message: 'head: illegal option -- --'
     };
 
-    assert.throws(() => headMain(mockedReadFile, ...args1), error);
-    assert.throws(() => headMain(mockedReadFile, ...args2), error);
+    const error2 = {
+      message: 'head: illegal option -- -a'
+    };
+
+    assert.throws(() => headMain(mockedReadFile, ...args1), error1);
+    assert.throws(() => headMain(mockedReadFile, ...args2), error2);
   });
 
   it('Should throw error if both options are specified', () => {
@@ -81,7 +85,7 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args = ['-n', 'a', 'a.txt'];
     const error = {
-      message: 'head: illegal count count'
+      message: 'head: illegal -n count'
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);
@@ -93,7 +97,7 @@ describe('headMain', () => {
       { fileName: 'b.txt', content: 'bye' }];
     const mockedReadFiles = mockReadFiles(filesSet);
     const args = ['-n', '1', 'a.txt', 'b.txt'];
-    const contents = '==>a.txt<==\nhello\n==>b.txt<==\nbye';
+    const contents = '==>a.txt<==\nhello\n\n==>b.txt<==\nbye';
 
     assert.deepStrictEqual(headMain(mockedReadFiles, ...args), contents);
   });

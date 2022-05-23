@@ -3,16 +3,16 @@ const { head, lines, charactersUpto, } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
-    assert.deepStrictEqual(head({ 'option': 'count', 'value:': 10 },
+    assert.deepStrictEqual(head({ 'option': 'lines', 'value:': 10 },
       'hello'), 'hello');
-    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+    assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       'ok'), 'ok');
   });
 
   it('Should give multiple lines', () => {
-    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+    assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       'hello\nbye'), 'hello\nbye');
-    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+    assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       'hello\nbye\nok'),
       'hello\nbye\nok');
   });
@@ -21,7 +21,7 @@ describe('head', () => {
     const lines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk';
     const expectedLines = 'a\nb\nc\nd\ne\nf\ng\nh\ni\nj';
 
-    assert.deepStrictEqual(head({ 'option': 'count', 'value': 10 },
+    assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       lines), expectedLines);
   });
 

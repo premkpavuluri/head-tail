@@ -6,10 +6,15 @@
 - [ ] change option name `count` to `lines`
 - [ ] check if option value is 0 or not.
 
+
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
 **DONE:**
+- [x] Implement parser
+  1. Structure the data
+  2. Parse the data
+  3. Validate the parsed data
 - [x] Implement for multiple files `head options file...`
   - [x] Implement formatter for multiple files
 - [x] handle --help

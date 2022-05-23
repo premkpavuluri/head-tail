@@ -1,4 +1,4 @@
-const { parseArgs } = require('./parseArgs.js');
+const { parseArgs } = require('./parseArguments.js');
 const { splitLines, joinLines } = require('./stringUtils.js');
 const { format } = require('./formatter.js');
 
@@ -9,7 +9,7 @@ const lines = (content, count) => {
 };
 
 const head = ({ option, value }, content) => {
-  if (option === 'count') {
+  if (option === 'lines') {
     return lines(content, value);
   }
 

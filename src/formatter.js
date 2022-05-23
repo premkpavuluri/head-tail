@@ -1,5 +1,3 @@
-const { joinLines } = require('./stringUtils.js');
-
 const format = function (files, contents) {
   if (files.length < 2) {
     return contents[0];
@@ -9,7 +7,7 @@ const format = function (files, contents) {
     return `==>${file}<==\n${contents[index]}`;
   });
 
-  return joinLines(formattedContents);
+  return formattedContents.join('\n\n');
 };
 
 exports.format = format;

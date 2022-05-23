@@ -14,6 +14,6 @@ describe('format', () => {
     const contents = ['hello', 'bye'];
 
     assert.deepStrictEqual(format(files, contents),
-      '==>a.txt<==\nhello\n==>b.txt<==\nbye');
+      '==>a.txt<==\nhello\n\n==>b.txt<==\nbye');
   });
 });
