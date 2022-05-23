@@ -60,11 +60,11 @@ describe('headMain', () => {
     const args1 = ['--help', '1', 'a.txt'];
     const args2 = ['-a', '1', 'a.txt'];
     const error1 = {
-      message: 'head: illegal option -- --'
+      message: 'head: illegal option -- undefined'
     };
 
     const error2 = {
-      message: 'head: illegal option -- -a'
+      message: 'head: illegal option -- undefined'
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args1), error1);
@@ -75,17 +75,17 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args = ['-n', '1', '-c', '1', 'a.txt'];
     const error = {
-      message: 'can not combine line and byte counts'
+      message: 'head: can not combine line and byte counts'
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);
   });
 
-  it('Should throw error if option value is valid', () => {
+  it('Should throw error if option value is invalid', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args = ['-n', 'a', 'a.txt'];
     const error = {
-      message: 'head: illegal -n count'
+      message: 'head: illegal lines count'
     };
 
     assert.throws(() => headMain(mockedReadFile, ...args), error);

@@ -1,27 +1,10 @@
 const isOption = (option) => option.startsWith('-');
 const removeEmpty = (list) => list.filter(item => item.length > 0);
+const isEmpty = (object) => Object.keys(object).length === 0;
 
 const optionName = function (key) {
   const keys = { '-n': 'lines', '-c': 'bytes' };
   return keys[key];
-};
-
-const throwIfIllegal = (option) => {
-  if (!['-n', '-c'].includes(option)) {
-    throw { message: `head: illegal option -- ${option}` };
-  }
-};
-
-const throwIfMoreOptions = (option, options) => {
-  if (!options.includes(option) && options.length !== 0) {
-    throw { message: 'can not combine line and byte counts' };
-  }
-};
-
-const throwIfInvalidValue = (option, value) => {
-  if (!isFinite(value) || +value <= 0) {
-    throw { message: `head: illegal ${option} count` };
-  }
 };
 
 const partition = (text, partitionPoint) => {
@@ -38,7 +21,7 @@ const getOption = (argument) => {
   return partition(argument, 2);
 };
 
-const formatArgs = function (args) {
+const seperateArgs = function (args) {
   const options = args.flatMap(argument => {
     if (isOption(argument)) {
       return getOption(argument);
@@ -49,35 +32,51 @@ const formatArgs = function (args) {
   return removeEmpty(options);
 };
 
-const validateArgs = function (args) {
-  const options = [];
-  for (let index = 0; isOption(args[index]); index += 2) {
-    const option = args[index];
-    throwIfIllegal(option);
-    throwIfMoreOptions(option, options);
-    throwIfInvalidValue(option, args[index + 1]);
-    options.push(option);
+const isNotValidOption = (option) => {
+  const validOptions = ['lines', 'bytes'];
+  return !validOptions.includes(option);
+};
+
+const isValidValue = (value) => isFinite(value) || value <= 0;
+
+const validateOption = (oldOption, newOption) => {
+  if (isNotValidOption(newOption.option)) {
+    throw { message: `head: illegal option -- ${newOption.option}` };
   }
 
-  return args;
+  if (oldOption.option !== newOption.option && !isEmpty(oldOption)) {
+    throw { message: 'head: can not combine line and byte counts' };
+  }
+};
+
+const validateValue = ({ option, value }) => {
+  if (!isValidValue(value)) {
+    throw {
+      message: `head: illegal ${option} count`
+    };
+  }
 };
 
 const parseArgs = function (args) {
-  const formattedArgs = validateArgs(formatArgs(args));
+  const seperatedArgs = seperateArgs(args);
   const parsedArgs = { options: { 'option': 'lines', 'value': 10 } };
 
   let index = 0;
-  while (isOption(formattedArgs[index])) {
-    const option = optionName(formattedArgs[index]);
-    const value = +formattedArgs[index + 1];
-    parsedArgs.options = { option, value };
+  let options = {};
+  while (isOption(seperatedArgs[index])) {
+    const option = optionName(seperatedArgs[index]);
+    const value = +seperatedArgs[index + 1];
+    validateOption(options, { option, value });
+    validateValue({ option, value });
+    options = { option, value };
+    parsedArgs.options = options;
     index += 2;
   }
 
-  parsedArgs.fileNames = formattedArgs.slice(index);
+  parsedArgs.fileNames = seperatedArgs.slice(index);
   return parsedArgs;
 };
 
-exports.formatArgs = formatArgs;
-exports.validateArgs = validateArgs;
+exports.formatArgs = seperateArgs;
+exports.seperateArgs = seperateArgs;
 exports.parseArgs = parseArgs;
