@@ -20,55 +20,80 @@ const mockReadFiles = function (fileContents) {
   };
 };
 
+const mocklog = function (expectedContents, inputs) {
+  let index = 0;
+  return function (content) {
+    inputs.push(content);
+    assert.deepEqual(content, expectedContents[index]);
+    index++;
+  };
+};
+
 describe('headMain', () => {
   it('Should give specified number of lines', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hello');
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog(['hello'], logInputs);
     const args = ['-n', '1', 'a.txt'];
-    assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'hello');
-
-    const args2 = ['-n', '3', 'a.txt'];
-    assert.deepStrictEqual(headMain(mockedReadFile, ...args2), 'hello');
+    headMain(mockedReadFile, log, eLog, ...args);
+    assert.deepStrictEqual(logInputs, ['hello']);
+    assert.deepStrictEqual(errors, []);
   });
 
   it('When count is more than file content', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hello\nhi');
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog(['hello\nhi'], logInputs);
     const args = ['-n', '3', 'a.txt'];
+    headMain(mockedReadFile, log, eLog, ...args);
 
-    assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'hello\nhi');
+    assert.deepStrictEqual(logInputs, ['hello\nhi']);
+    assert.deepStrictEqual(errors, []);
   });
 
   it('Should give specified number of bytes', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hii');
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog(['h'], logInputs);
     const args = ['-c', '1', 'a.txt'];
 
-    assert.deepStrictEqual(headMain(mockedReadFile, ...args), 'h');
+    headMain(mockedReadFile, log, eLog, ...args);
+    assert.deepStrictEqual(logInputs, ['h']);
+    assert.deepStrictEqual(errors, []);
   });
 
   it('Should throw error when file is not found', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args = ['-n', '1', 'not.txt'];
-    const error = {
-      name: 'FileReadError',
-      message: 'head: not.txt: No such file or directory'
-    };
+    const logInputs = [];
+    const errors = [];
+    const expectedErr = ['head: not.txt: No such file or directory'];
+    const eLog = mocklog(expectedErr, errors);
+    const log = mocklog([], logInputs);
 
-    assert.throws(() => headMain(mockedReadFile, ...args), error);
+    headMain(mockedReadFile, log, eLog, ...args);
+    assert.deepStrictEqual(errors, expectedErr);
+    assert.deepStrictEqual(logInputs, []);
   });
 
   it('Should throw error if option is invalid', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
-    const args1 = ['--help', '1', 'a.txt'];
-    const args2 = ['-a', '1', 'a.txt'];
-    const error1 = {
+    const args = ['--help', '1', 'a.txt'];
+    const error = {
       message: 'head: illegal option -- undefined'
     };
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog([], logInputs);
 
-    const error2 = {
-      message: 'head: illegal option -- undefined'
-    };
-
-    assert.throws(() => headMain(mockedReadFile, ...args1), error1);
-    assert.throws(() => headMain(mockedReadFile, ...args2), error2);
+    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
 
   it('Should throw error if both options are specified', () => {
@@ -77,8 +102,12 @@ describe('headMain', () => {
     const error = {
       message: 'head: can not combine line and byte counts'
     };
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog([], logInputs);
 
-    assert.throws(() => headMain(mockedReadFile, ...args), error);
+    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
 
   it('Should throw error if option value is invalid', () => {
@@ -87,8 +116,12 @@ describe('headMain', () => {
     const error = {
       message: 'head: illegal lines count'
     };
+    const logInputs = [];
+    const errors = [];
+    const eLog = mocklog([], errors);
+    const log = mocklog([], logInputs);
 
-    assert.throws(() => headMain(mockedReadFile, ...args), error);
+    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
 
   it('Should give head content of multiple files', () => {
@@ -97,8 +130,32 @@ describe('headMain', () => {
       { fileName: 'b.txt', content: 'bye' }];
     const mockedReadFiles = mockReadFiles(filesSet);
     const args = ['-n', '1', 'a.txt', 'b.txt'];
-    const contents = '==>a.txt<==\nhello\n\n==>b.txt<==\nbye';
+    const logInputs = [];
+    const errors = [];
+    const expectedOutput = ['==>a.txt<==\nhello\n', '==>b.txt<==\nbye\n'];
+    const eLog = mocklog([], errors);
+    const log = mocklog(expectedOutput, logInputs);
 
-    assert.deepStrictEqual(headMain(mockedReadFiles, ...args), contents);
+    headMain(mockedReadFiles, log, eLog, ...args);
+    assert.deepStrictEqual(expectedOutput, logInputs);
+    assert.deepStrictEqual([], errors);
+  });
+
+  it('Should give error when one of the file is not present', () => {
+    const filesSet = [
+      { fileName: 'a', content: 'hello' },
+      { fileName: 'b', content: 'bye' }];
+    const mockedReadFiles = mockReadFiles(filesSet);
+    const args = ['-n', '1', 'a', 'badfile'];
+    const logInputs = [];
+    const errors = [];
+    const expectedOutput = ['==>a<==\nhello\n'];
+    const expectedErr = ['head: badfile: No such file or directory'];
+    const eLog = mocklog(expectedErr, errors);
+    const log = mocklog(expectedOutput, logInputs);
+
+    headMain(mockedReadFiles, log, eLog, ...args);
+    assert.deepStrictEqual(logInputs, expectedOutput);
+    assert.deepStrictEqual(errors, expectedErr);
   });
 });

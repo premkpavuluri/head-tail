@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, lines, charactersUpto, } = require('../src/headLib.js');
+const { head, lines, charactersUpto, print } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
@@ -61,4 +61,32 @@ describe('charactersUpto', () => {
   it('When given limit is more than no of characters', () => {
     assert.deepStrictEqual(charactersUpto('ab', 3), 'ab');
   });
+});
+
+const mocklog = function (expectedContents, inputs) {
+  let index = 0;
+  return function (content) {
+    inputs.push(content);
+    assert.deepEqual(content, expectedContents[index]);
+    index++;
+  };
+};
+
+describe('print', () => {
+  it('Should log the content without header when filecount is 1', () => {
+    const logInputs = [];
+    const log = mocklog(['hi'], logInputs);
+    print(log, 'a.txt', 1, 'hi');
+
+    assert.deepStrictEqual(logInputs, ['hi']);
+  });
+
+  it('Shuould log the content with header when filecount is more than 1',
+    () => {
+      const logInputs = [];
+      const log = mocklog(['==>a.txt<==\nhi\n'], logInputs);
+      print(log, 'a.txt', 2, 'hi');
+
+      assert.deepStrictEqual(logInputs, ['==>a.txt<==\nhi\n']);
+    });
 });
