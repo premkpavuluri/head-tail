@@ -1,13 +1,20 @@
 **TODO:**
-
+- [ ] `tail` dir structure
+- [ ] Create `tailLib.js` and `testTailLib.js`
+- [ ] Make tail work for `single line`
+- [ ] Make tail work for `content` instead of `files`
+- [ ] Make tail work without options
 
 **MAY BE:**
-- [ ] Extract parseOptions from parseArgs
+- [ ] Investigate how `tail` works
 
 
 **DONE:TAIL**
+- [x] Get the contract of tail
+
 
 **DONE:HEAD**
+- [x] ~~Extract parseOptions from parseArgs~~
 - [x] Implement parser for non-space options `-n1,-c1,-1`
 - [x] change option name `count` to `lines`
 - [x] check if option value is 0 or not.
@@ -15,7 +22,7 @@
   1. Structure the data
   2. Parse the data
   3. Validate the parsed data
-- [x]~~ Validate args before parsing~~
+- [x] ~~Validate args before parsing~~
   - [x] arrange the options
   - [x] validate options(like:both present,invalid,invalid value )
 - [x] Implement for multiple files `head options file...`
@@ -38,7 +45,7 @@
 - [x] Implement `head file`
 - [x] Link `parseArgs` and `head`
 - [x] Seperate test files
-- [x] ~~ Move lines functionality into another file ~~
+- [x] ~~Move lines functionality into another file~~
 - [x] Refactor `head`
 - [x] Make `head` works for content instead of files
 - [x] Make `head` to take options
