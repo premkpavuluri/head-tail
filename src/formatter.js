@@ -1,13 +1,10 @@
-const format = function (files, contents) {
-  if (files.length < 2) {
-    return contents[0];
+const format = function (file, filesCount, content) {
+  if (filesCount < 2) {
+    return content;
   }
 
-  const formattedContents = files.map((file, index) => {
-    return `==>${file}<==\n${contents[index]}`;
-  });
-
-  return formattedContents.join('\n\n');
+  const header = `==>${file}<==\n`;
+  return `${header}${content}\n`;
 };
 
 exports.format = format;

@@ -1,20 +1,23 @@
 **TODO:**
-- [ ] Implement parser for non-space options `-n1,-c1,-1`
-- [ ] Validate args before parsing
-  - [ ] arrange the options
-  - [ ] validate options(like:both present,invalid,invalid value )
-- [ ] change option name `count` to `lines`
-- [ ] check if option value is 0 or not.
 
 
 **MAY BE:**
 - [ ] Extract parseOptions from parseArgs
 
-**DONE:**
+
+**DONE:TAIL**
+
+**DONE:HEAD**
+- [x] Implement parser for non-space options `-n1,-c1,-1`
+- [x] change option name `count` to `lines`
+- [x] check if option value is 0 or not.
 - [x] Implement parser
   1. Structure the data
   2. Parse the data
   3. Validate the parsed data
+- [x]~~ Validate args before parsing~~
+  - [x] arrange the options
+  - [x] validate options(like:both present,invalid,invalid value )
 - [x] Implement for multiple files `head options file...`
   - [x] Implement formatter for multiple files
 - [x] handle --help

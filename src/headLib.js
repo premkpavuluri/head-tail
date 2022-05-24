@@ -16,33 +16,27 @@ const head = ({ option, value }, content) => {
   return charactersUpto(content, value);
 };
 
-const print = function (logger, file, filecount, content) {
-  if (filecount <= 1) {
-    logger(content);
-    return 0;
-  }
-
-  const header = `==>${file}<==\n`;
-  logger(header + content + '\n');
-};
-
 const headMain = function (readFile, log, eLog, ...args) {
   const { fileNames, options } = parseArgs(args);
+  let exitCode = 0;
 
   fileNames.forEach(fileName => {
     try {
       const content = readFile(fileName, 'utf8');
       const headContent = head(options, content);
-      print(log, fileName, fileNames.length, headContent);
+      const formattedContent = format(fileName, fileNames.length, headContent);
+      log(formattedContent);
     } catch (error) {
       const message = `head: ${fileName}: No such file or directory`;
-      print(eLog, fileName, 1, message);
+      eLog(message);
+      exitCode = 1;
     }
   });
+
+  return exitCode;
 };
 
 exports.head = head;
 exports.lines = lines;
 exports.charactersUpto = charactersUpto;
 exports.headMain = headMain;
-exports.print = print;
