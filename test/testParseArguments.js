@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { seperateArgs, parseArgs } = require('../src/parseArguments.js');
+const { seperateArgs, parseArgs } = require('../src/head/parseArguments.js');
 
 describe('seperateArgs', () => {
   it('Should format the args and return array', () => {

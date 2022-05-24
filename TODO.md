@@ -1,5 +1,4 @@
 **TODO:**
-- [ ] `tail` dir structure
 - [ ] Create `tailLib.js` and `testTailLib.js`
 - [ ] Make tail work for `single line`
 - [ ] Make tail work for `content` instead of `files`
@@ -10,6 +9,7 @@
 
 
 **DONE:TAIL**
+- [x] `tail` dir structure
 - [x] Get the contract of tail
 
 
