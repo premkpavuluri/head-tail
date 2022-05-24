@@ -64,7 +64,7 @@ describe('parseArgs', () => {
   });
 
   it('Should throw error if option value is invalid', () => {
-    const args = ['-n', 'a'];
+    const args = ['-n', '0'];
     const lineError = {
       message: 'head: illegal lines count'
     };

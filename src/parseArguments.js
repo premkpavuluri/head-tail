@@ -1,4 +1,4 @@
-const isOption = (option) => option.startsWith('-');
+const isOption = (option) => /^-/.test(option);
 const removeEmpty = (list) => list.filter(item => item.length > 0);
 const isEmpty = (object) => Object.keys(object).length === 0;
 
@@ -36,8 +36,7 @@ const isNotValidOption = (option) => {
   const validOptions = ['lines', 'bytes'];
   return !validOptions.includes(option);
 };
-
-const isValidValue = (value) => isFinite(value) || value <= 0;
+const isNotValidValue = (value) => !isFinite(value) || value <= 0;
 
 const validateOption = (oldOption, newOption) => {
   if (isNotValidOption(newOption.option)) {
@@ -50,7 +49,7 @@ const validateOption = (oldOption, newOption) => {
 };
 
 const validateValue = ({ option, value }) => {
-  if (!isValidValue(value)) {
+  if (isNotValidValue(value)) {
     throw {
       message: `head: illegal ${option} count`
     };
