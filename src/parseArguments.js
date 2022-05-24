@@ -36,46 +36,72 @@ const isNotValidOption = (option) => {
   const validOptions = ['lines', 'bytes'];
   return !validOptions.includes(option);
 };
+
 const isNotValidValue = (value) => !isFinite(value) || value <= 0;
 
-const validateOption = (oldOption, newOption) => {
-  if (isNotValidOption(newOption.option)) {
-    throw { message: `head: illegal option -- ${newOption.option}` };
+const illegalOptionError = (option) => {
+  return {
+    message: `head: illegal option -- ${option}`
+  };
+};
+
+const illegalValueError = (option) => {
+  return {
+    message: `head: illegal ${option} count`
+  };
+};
+
+const canntotCombineError = () => {
+  return {
+    message: 'head: can\'t combine line and byte counts'
+  };
+};
+
+const validateOptions = (prevOption, currentOption) => {
+  if (isNotValidOption(currentOption.option)) {
+    throw illegalOptionError(currentOption.option);
   }
 
-  if (oldOption.option !== newOption.option && !isEmpty(oldOption)) {
-    throw { message: 'head: can not combine line and byte counts' };
+  if (prevOption.option !== currentOption.option && !isEmpty(prevOption)) {
+    throw canntotCombineError();
+  }
+
+  if (isNotValidValue(currentOption.value)) {
+    throw illegalValueError(currentOption.option);
   }
 };
 
-const validateValue = ({ option, value }) => {
-  if (isNotValidValue(value)) {
-    throw {
-      message: `head: illegal ${option} count`
-    };
+const usageError = () => {
+  return {
+    message: 'usage: head [-n lines | -c bytes] [file ...]'
+  };
+};
+
+const validateFiles = (files) => {
+  if (isEmpty(files)) {
+    throw usageError();
   }
 };
 
-const parseArgs = function (args) {
-  const seperatedArgs = seperateArgs(args);
+const parseArgs = function (cmdLineArgs) {
+  const args = seperateArgs(cmdLineArgs);
   const parsedArgs = { options: { 'option': 'lines', 'value': 10 } };
 
   let index = 0;
   let options = {};
-  while (isOption(seperatedArgs[index])) {
-    const option = optionName(seperatedArgs[index]);
-    const value = +seperatedArgs[index + 1];
-    validateOption(options, { option, value });
-    validateValue({ option, value });
+  while (isOption(args[index])) {
+    const option = optionName(args[index]);
+    const value = +args[index + 1];
+    validateOptions(options, { option, value });
     options = { option, value };
     parsedArgs.options = options;
     index += 2;
   }
 
-  parsedArgs.fileNames = seperatedArgs.slice(index);
+  parsedArgs.fileNames = args.slice(index);
+  validateFiles(parsedArgs.fileNames);
   return parsedArgs;
 };
 
-exports.formatArgs = seperateArgs;
 exports.seperateArgs = seperateArgs;
 exports.parseArgs = parseArgs;

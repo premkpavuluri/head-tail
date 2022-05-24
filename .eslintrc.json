@@ -119,7 +119,11 @@
       ],
       "rules": {
         "no-console": "off",
-        "max-statements": "off"
+        "max-statements": "off",
+        "complexity": [
+          "error",
+          5
+        ]
       }
     }
   ]

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { head, lines, charactersUpto, print } = require('../src/headLib.js');
+const { head, firstNLines, firstNCharacters } = require('../src/headLib.js');
 
 describe('head', () => {
   it('Should give single line', () => {
@@ -32,33 +32,33 @@ describe('head', () => {
   });
 });
 
-describe('lines', () => {
+describe('firstNLines', () => {
   it('Should return given number of lines', () => {
-    assert.deepStrictEqual(lines('h\ni', 1), 'h');
-    assert.deepStrictEqual(lines('h\ni', 2), 'h\ni');
+    assert.deepStrictEqual(firstNLines('h\ni', 1), 'h');
+    assert.deepStrictEqual(firstNLines('h\ni', 2), 'h\ni');
   });
 
   it('Should return all lines if count is greater than lines', () => {
-    assert.deepStrictEqual(lines('a\nb', 3), 'a\nb');
+    assert.deepStrictEqual(firstNLines('a\nb', 3), 'a\nb');
   });
 
   it('When lines are empty', () => {
-    assert.deepStrictEqual(lines('', 1), '');
+    assert.deepStrictEqual(firstNLines('', 1), '');
   });
 });
 
-describe('charactersUpto', () => {
+describe('firstNCharacters', () => {
   it('Should give specified number of characters', () => {
-    assert.deepStrictEqual(charactersUpto('ab', 1), 'a');
-    assert.deepStrictEqual(charactersUpto('a\nc', 3), 'a\nc');
+    assert.deepStrictEqual(firstNCharacters('ab', 1), 'a');
+    assert.deepStrictEqual(firstNCharacters('a\nc', 3), 'a\nc');
   });
 
   it('When content have empty characters', () => {
-    assert.deepStrictEqual(charactersUpto('a b', 2), 'a ');
-    assert.deepStrictEqual(charactersUpto(' ', 1), ' ');
+    assert.deepStrictEqual(firstNCharacters('a b', 2), 'a ');
+    assert.deepStrictEqual(firstNCharacters(' ', 1), ' ');
   });
 
   it('When given limit is more than no of characters', () => {
-    assert.deepStrictEqual(charactersUpto('ab', 3), 'ab');
+    assert.deepStrictEqual(firstNCharacters('ab', 3), 'ab');
   });
 });

@@ -58,7 +58,7 @@ describe('parseArgs', () => {
 
   it('Should throw error if both options are specified', () => {
     const args = ['-n', '1', '-c', '1', 'a'];
-    const error = { message: 'head: can not combine line and byte counts' };
+    const error = { message: 'head: can\'t combine line and byte counts' };
 
     assert.throws(() => parseArgs(args), error);
   });

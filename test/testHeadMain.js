@@ -20,12 +20,9 @@ const mockReadFiles = function (fileContents) {
   };
 };
 
-const mocklog = function (expectedContents, inputs) {
-  let index = 0;
+const mocklog = function (inputs) {
   return function (content) {
     inputs.push(content);
-    assert.deepEqual(content, expectedContents[index]);
-    index++;
   };
 };
 
@@ -34,9 +31,10 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hello');
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog(['hello'], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
     const args = ['-n', '1', 'a.txt'];
+
     headMain(mockedReadFile, log, eLog, ...args);
     assert.deepStrictEqual(logInputs, ['hello']);
     assert.deepStrictEqual(errors, []);
@@ -46,8 +44,8 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hello\nhi');
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog(['hello\nhi'], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
     const args = ['-n', '3', 'a.txt'];
     headMain(mockedReadFile, log, eLog, ...args);
 
@@ -59,8 +57,8 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hii');
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog(['h'], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
     const args = ['-c', '1', 'a.txt'];
 
     headMain(mockedReadFile, log, eLog, ...args);
@@ -74,8 +72,8 @@ describe('headMain', () => {
     const logInputs = [];
     const errors = [];
     const expectedErr = ['head: not.txt: No such file or directory'];
-    const eLog = mocklog(expectedErr, errors);
-    const log = mocklog([], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     headMain(mockedReadFile, log, eLog, ...args);
     assert.deepStrictEqual(errors, expectedErr);
@@ -90,8 +88,8 @@ describe('headMain', () => {
     };
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog([], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
@@ -100,12 +98,12 @@ describe('headMain', () => {
     const mockedReadFile = mockReadFile('a.txt', 'hi');
     const args = ['-n', '1', '-c', '1', 'a.txt'];
     const error = {
-      message: 'head: can not combine line and byte counts'
+      message: 'head: can\'t combine line and byte counts'
     };
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog([], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
@@ -118,8 +116,8 @@ describe('headMain', () => {
     };
     const logInputs = [];
     const errors = [];
-    const eLog = mocklog([], errors);
-    const log = mocklog([], logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
   });
@@ -133,8 +131,8 @@ describe('headMain', () => {
     const logInputs = [];
     const errors = [];
     const expectedOutput = ['==>a.txt<==\nhello\n', '==>b.txt<==\nbye\n'];
-    const eLog = mocklog([], errors);
-    const log = mocklog(expectedOutput, logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     headMain(mockedReadFiles, log, eLog, ...args);
     assert.deepStrictEqual(expectedOutput, logInputs);
@@ -151,8 +149,8 @@ describe('headMain', () => {
     const errors = [];
     const expectedOutput = ['==>a<==\nhello\n'];
     const expectedErr = ['head: badfile: No such file or directory'];
-    const eLog = mocklog(expectedErr, errors);
-    const log = mocklog(expectedOutput, logInputs);
+    const eLog = mocklog(errors);
+    const log = mocklog(logInputs);
 
     headMain(mockedReadFiles, log, eLog, ...args);
     assert.deepStrictEqual(logInputs, expectedOutput);
