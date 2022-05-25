@@ -11,7 +11,7 @@ const main = function () {
     console.error(error.message);
   }
 
-  process.exit(exitCode);
+  process.exitCode = exitCode;
 };
 
 main();

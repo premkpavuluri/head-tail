@@ -1,3 +1,6 @@
+const { illegalOptionError, canntotCombineError,
+  illegalValueError, usageError } = require('./headErrors.js');
+
 const isOption = (option) => /^-/.test(option);
 const removeEmpty = (list) => list.filter(item => item.length > 0);
 const isEmpty = (object) => Object.keys(object).length === 0;
@@ -39,24 +42,6 @@ const isNotValidOption = (option) => {
 
 const isNotValidValue = (value) => !isFinite(value) || value <= 0;
 
-const illegalOptionError = (option) => {
-  return {
-    message: `head: illegal option -- ${option}`
-  };
-};
-
-const illegalValueError = (option) => {
-  return {
-    message: `head: illegal ${option} count`
-  };
-};
-
-const canntotCombineError = () => {
-  return {
-    message: 'head: can\'t combine line and byte counts'
-  };
-};
-
 const validateOptions = (prevOption, currentOption) => {
   if (isNotValidOption(currentOption.option)) {
     throw illegalOptionError(currentOption.option);
@@ -69,12 +54,6 @@ const validateOptions = (prevOption, currentOption) => {
   if (isNotValidValue(currentOption.value)) {
     throw illegalValueError(currentOption.option);
   }
-};
-
-const usageError = () => {
-  return {
-    message: 'usage: head [-n lines | -c bytes] [file ...]'
-  };
 };
 
 const validateFiles = (files) => {
