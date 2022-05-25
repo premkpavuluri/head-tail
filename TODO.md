@@ -1,13 +1,19 @@
 **TODO:**
 - [ ] Make tail work for `content` instead of `files`
 - [ ] Make tail work without options
-- [ ] Test `lastNLines`
+- [ ] Make tail work for -n option
+- [ ] Make tail work for -c option
+- [ ] splitLines to splitToLines
 
 **MAY BE:**
 - [ ] Investigate how `tail` works
 
 
 **DONE:TAIL**
+- [x] Make tail work for single option
+- [x] Implement lastNCharacters
+- [x] Implement reverseContent
+- [x] Test `lastNLines`
 - [x] Create `tailLib.js` and `testTailLib.js`
 - [x] Make tail work for `single line`
 - [x] Extract lastNLines from tail

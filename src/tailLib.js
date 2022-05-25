@@ -1,14 +1,41 @@
-const splitToLines = (text) => text.split('\n');
-const joinLines = (lines) => lines.join('\n');
+const { splitLines, joinLines } = require('./stringUtils.js');
 
 const lastNLines = (content, count) => {
-  const lines = splitToLines(content);
-  const linesCount = lines.length - count;
-  return joinLines(lines.slice(linesCount));
+  if (count === 0) {
+    return '';
+  }
+
+  const lines = splitLines(content);
+  return joinLines(lines.slice(-count));
 };
 
-const tail = function (content) {
-  return lastNLines(content, 10);
+const lastNCharacters = (content, count) => {
+  if (count === 0) {
+    return '';
+  }
+
+  return content.slice(-count);
+};
+
+const reverseContent = (content) => {
+  const lines = splitLines(content);
+  return joinLines(lines.reverse());
+};
+
+const tail = function (content, option) {
+  const references = {
+    'lines': lastNLines,
+    'bytes': lastNCharacters,
+    'reverse': reverseContent
+  };
+
+  const optionName = option.flag;
+  const value = option.value;
+  const fnToCall = references[optionName];
+  return fnToCall(content, value);
 };
 
 exports.tail = tail;
+exports.lastNLines = lastNLines;
+exports.lastNCharacters = lastNCharacters;
+exports.reverseContent = reverseContent;
