@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { format } = require('../src/head/formatter.js');
+const { format } = require('../src/formatter.js');
 
 describe('format', () => {
   it('When file count 1', () => {

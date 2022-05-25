@@ -1,14 +1,16 @@
 **TODO:**
-- [ ] Create `tailLib.js` and `testTailLib.js`
-- [ ] Make tail work for `single line`
 - [ ] Make tail work for `content` instead of `files`
 - [ ] Make tail work without options
+- [ ] Test `lastNLines`
 
 **MAY BE:**
 - [ ] Investigate how `tail` works
 
 
 **DONE:TAIL**
+- [x] Create `tailLib.js` and `testTailLib.js`
+- [x] Make tail work for `single line`
+- [x] Extract lastNLines from tail
 - [x] `tail` dir structure
 - [x] Get the contract of tail
 
