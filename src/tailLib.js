@@ -10,11 +10,7 @@ const lastNLines = (content, count) => {
 };
 
 const lastNCharacters = (content, count) => {
-  if (count === 0) {
-    return '';
-  }
-
-  return content.slice(-count);
+  return count === 0 ? '' : content.slice(-count);
 };
 
 const reverseContent = (content) => {
@@ -35,7 +31,15 @@ const tail = function (content, option) {
   return fnToCall(content, value);
 };
 
+const tailMain = function (reader, fileName) {
+  const option = { flag: 'lines', value: 10 };
+  const content = reader(fileName, 'utf8');
+
+  return tail(content, option);
+};
+
 exports.tail = tail;
 exports.lastNLines = lastNLines;
 exports.lastNCharacters = lastNCharacters;
 exports.reverseContent = reverseContent;
+exports.tailMain = tailMain;

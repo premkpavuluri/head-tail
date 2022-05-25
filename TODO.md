@@ -1,15 +1,18 @@
 **TODO:**
 - [ ] Make tail work for `content` instead of `files`
-- [ ] Make tail work without options
 - [ ] Make tail work for -n option
 - [ ] Make tail work for -c option
 - [ ] splitLines to splitToLines
+- [ ] Make tail work without options
+- [ ] Implement tailMain
+- [ ] Implement parser for tail
 
 **MAY BE:**
 - [ ] Investigate how `tail` works
 
 
 **DONE:TAIL**
+- [x] Connect tailMain with tail.js
 - [x] Make tail work for single option
 - [x] Implement lastNCharacters
 - [x] Implement reverseContent
