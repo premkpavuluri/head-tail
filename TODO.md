@@ -32,10 +32,11 @@
 # HEAD
 
 - **TODO**
-
+  - [ ] Refactor `headMain`
 - **MAY BE:**
 
 - **DONE:**
+  - [x] Test `validateOptions` in parseArguments
   - [x] Implement parser for non-space options `-n1,-c1,-1`
   - [x] ~~Extract parseOptions from parseArgs~~
   - [x] change option name `count` to `lines`

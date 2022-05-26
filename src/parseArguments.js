@@ -84,3 +84,4 @@ const parseArgs = function (cmdLineArgs) {
 
 exports.seperateArgs = seperateArgs;
 exports.parseArgs = parseArgs;
+exports.validateOptions = validateOptions;
