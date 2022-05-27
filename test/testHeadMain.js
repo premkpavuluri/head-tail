@@ -33,9 +33,10 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
     const args = ['-n', '1', 'a.txt'];
 
-    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(logInputs, ['hello']);
     assert.deepStrictEqual(errors, []);
     assert.equal(exitCode, 0);
@@ -47,8 +48,9 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
     const args = ['-n', '3', 'a.txt'];
-    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, logger, ...args);
 
     assert.deepStrictEqual(logInputs, ['hello\nhi']);
     assert.deepStrictEqual(errors, []);
@@ -61,9 +63,10 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
     const args = ['-c', '1', 'a.txt'];
 
-    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(logInputs, ['h']);
     assert.deepStrictEqual(errors, []);
     assert.equal(exitCode, 0);
@@ -77,8 +80,9 @@ describe('headMain', () => {
     const expectedErr = ['head: not.txt: No such file or directory'];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(errors, expectedErr);
     assert.deepStrictEqual(logInputs, []);
     assert.equal(exitCode, 1);
@@ -94,8 +98,9 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
+    assert.throws(() => headMain(mockedReadFile, logger, ...args), error);
   });
 
   it('Should throw error if both options are specified', () => {
@@ -108,8 +113,9 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
+    assert.throws(() => headMain(mockedReadFile, logger, ...args), error);
   });
 
   it('Should throw error if option value is invalid', () => {
@@ -122,8 +128,9 @@ describe('headMain', () => {
     const errors = [];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    assert.throws(() => headMain(mockedReadFile, log, eLog, ...args), error);
+    assert.throws(() => headMain(mockedReadFile, logger, ...args), error);
   });
 
   it('Should give head content of multiple files', () => {
@@ -137,8 +144,9 @@ describe('headMain', () => {
     const expectedOutput = ['==>a.txt<==\nhello\n', '==>b.txt<==\nbye\n'];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    headMain(mockedReadFiles, log, eLog, ...args);
+    headMain(mockedReadFiles, logger, ...args);
     assert.deepStrictEqual(expectedOutput, logInputs);
     assert.deepStrictEqual([], errors);
   });
@@ -155,8 +163,9 @@ describe('headMain', () => {
     const expectedErr = ['head: badfile: No such file or directory'];
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
+    const logger = { eLog, log };
 
-    headMain(mockedReadFiles, log, eLog, ...args);
+    headMain(mockedReadFiles, logger, ...args);
     assert.deepStrictEqual(logInputs, expectedOutput);
     assert.deepStrictEqual(errors, expectedErr);
   });

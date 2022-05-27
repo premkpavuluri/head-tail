@@ -3,12 +3,13 @@ const { headMain } = require('./src/headLib.js');
 
 const main = function (args) {
   let exitCode = 0;
+  const { log, error: eLog } = console;
 
   try {
-    exitCode = headMain(fs.readFileSync, console.log, console.error, ...args);
+    exitCode = headMain(fs.readFileSync, { log, eLog }, ...args);
   } catch (error) {
     exitCode = 1;
-    console.error(error.message);
+    eLog(error.message);
   }
 
   process.exitCode = exitCode;

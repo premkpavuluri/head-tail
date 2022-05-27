@@ -3,14 +3,14 @@ const { head, firstNLines, firstNCharacters } =
   require('../src/headLib.js');
 
 describe('head', () => {
-  it('Should give single line', () => {
+  it('Should give single line when content is single line', () => {
     assert.deepStrictEqual(head({ 'option': 'lines', 'value:': 10 },
       'hello'), 'hello');
     assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       'ok'), 'ok');
   });
 
-  it('Should give multiple lines', () => {
+  it('When content has multiple lines', () => {
     assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },
       'hello\nbye'), 'hello\nbye');
     assert.deepStrictEqual(head({ 'option': 'lines', 'value': 10 },

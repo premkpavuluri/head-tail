@@ -16,7 +16,7 @@ const head = ({ option, value }, content) => {
   return firstNCharacters(content, value);
 };
 
-const headMain = function (readFile, log, eLog, ...args) {
+const headMain = function (readFile, { log, eLog }, ...args) {
   const { fileNames, options } = parseArgs(args);
   let exitCode = 0;
 
