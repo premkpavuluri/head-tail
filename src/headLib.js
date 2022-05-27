@@ -1,10 +1,18 @@
 const { parseArgs } = require('./parseArguments.js');
 const { splitLines, joinLines } = require('./stringUtils.js');
+const { formatter } = require('./formatter.js');
+
+const fileError = (file) => `head: ${file}: No such file or directory`;
+
+const exitCode = (records) => {
+  return records.some(record => record.error) ? 1 : 0;
+};
 
 const firstNCharacters = (content, limit) => content.slice(0, limit);
 const firstNLines = (content, count) => {
   const lines = splitLines(content);
-  return joinLines(lines.slice(0, count));
+  const firstLines = lines.slice(0, count);
+  return joinLines(firstLines);
 };
 
 const head = ({ option, value }, content) => {
@@ -14,14 +22,6 @@ const head = ({ option, value }, content) => {
 
   return firstNCharacters(content, value);
 };
-
-const singleFileFormatter = ({ content }) => content;
-const multiFileFormatter = ({ fileName, content }) => {
-  return `==>${fileName}<==\n${content}\n`;
-};
-
-const formatter = (files) =>
-  files.length < 2 ? singleFileFormatter : multiFileFormatter;
 
 const print = (contents, { log, eLog }, format) => {
   contents.forEach(content => {
@@ -39,7 +39,7 @@ const headOfFile = (fileName, options, readFile) => {
     const headContent = head(options, content);
     return { fileName, content: headContent };
   } catch (err) {
-    const error = `head: ${fileName}: No such file or directory`;
+    const error = fileError(fileName);
     return { fileName, error };
   }
 };
@@ -53,6 +53,8 @@ const headMain = function (readFile, logger, ...args) {
 
   const format = formatter(fileNames);
   print(headContents, logger, format);
+
+  return exitCode(headContents);
 };
 
 exports.head = head;

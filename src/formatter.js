@@ -1,10 +1,12 @@
-const format = function (file, filesCount, content) {
-  if (filesCount < 2) {
-    return content;
-  }
+const singleFileFormatter = ({ content }) => content;
 
-  const header = `==>${file}<==\n`;
-  return `${header}${content}\n`;
+const multiFileFormatter = ({ fileName, content }) => {
+  return `==>${fileName}<==\n${content}\n`;
 };
 
-exports.format = format;
+const hasSingleFile = (fileCount) => fileCount < 2;
+
+const formatter = (files) =>
+  hasSingleFile(files.length) ? singleFileFormatter : multiFileFormatter;
+
+exports.formatter = formatter;

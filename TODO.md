@@ -32,15 +32,17 @@
 # HEAD
 
 - **TODO**
-  - [ ] Refactor `headMain`
-    - [x] Extract try-catch block.
-    - [x] Seperate the `head` and `display` responsibility in try-catch
+
 
 <br/>
 
 - **MAY BE:**
 
 - **DONE:**
+  - [x] Extract format files into another file
+  - [x] Refactor `headMain`
+    - [x] Extract try-catch block.
+    - [x] Seperate the `head` and `display` responsibility in try-catch
   - [x] Test `validateOptions` in parseArguments
   - [x] Implement parser for non-space options `-n1,-c1,-1`
   - [x] ~~Extract parseOptions from parseArgs~~

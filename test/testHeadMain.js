@@ -39,7 +39,7 @@ describe('headMain', () => {
     const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(logInputs, ['hello']);
     assert.deepStrictEqual(errors, []);
-    // assert.equal(exitCode, 0);
+    assert.equal(exitCode, 0);
   });
 
   it('When count is more than file content', () => {
@@ -54,7 +54,7 @@ describe('headMain', () => {
 
     assert.deepStrictEqual(logInputs, ['hello\nhi']);
     assert.deepStrictEqual(errors, []);
-    // assert.equal(exitCode, 0);
+    assert.equal(exitCode, 0);
   });
 
   it('Should give specified number of bytes', () => {
@@ -69,7 +69,7 @@ describe('headMain', () => {
     const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(logInputs, ['h']);
     assert.deepStrictEqual(errors, []);
-    // assert.equal(exitCode, 0);
+    assert.equal(exitCode, 0);
   });
 
   it('Should throw error when file is not found', () => {
@@ -85,7 +85,7 @@ describe('headMain', () => {
     const exitCode = headMain(mockedReadFile, logger, ...args);
     assert.deepStrictEqual(errors, expectedErr);
     assert.deepStrictEqual(logInputs, []);
-    // assert.equal(exitCode, 1);
+    assert.equal(exitCode, 1);
   });
 
   it('Should throw error if option is invalid', () => {
@@ -171,7 +171,7 @@ describe('headMain', () => {
   });
 });
 
-describe.only('headOfFile', () => {
+describe('headOfFile', () => {
   it('Should return head content of file', () => {
     const option1 = { option: 'lines', value: 2 };
     const option2 = { option: 'lines', value: 2 };
