@@ -5,7 +5,7 @@ const isOption = (option) => /^-/.test(option);
 const removeEmpty = (list) => list.filter(item => item.length > 0);
 const isEmpty = (object) => Object.keys(object).length === 0;
 
-const optionName = function (key) {
+const optionName = (key) => {
   const keys = { '-n': 'lines', '-c': 'bytes' };
   return keys[key];
 };
@@ -24,7 +24,7 @@ const getOption = (argument) => {
   return partition(argument, 2);
 };
 
-const seperateArgs = function (args) {
+const seperateArgs = (args) => {
   const options = args.flatMap(argument => {
     if (isOption(argument)) {
       return getOption(argument);
@@ -64,7 +64,7 @@ const validateFiles = (files) => {
 
 const parseArgs = function (cmdLineArgs) {
   const args = seperateArgs(cmdLineArgs);
-  const parsedArgs = { options: { 'option': 'lines', 'value': 10 } };
+  const parsedArgs = { options: { option: 'lines', value: 10 } };
 
   let index = 0;
   let options = {};

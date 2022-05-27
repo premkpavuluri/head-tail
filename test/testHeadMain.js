@@ -35,9 +35,10 @@ describe('headMain', () => {
     const log = mocklog(logInputs);
     const args = ['-n', '1', 'a.txt'];
 
-    headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
     assert.deepStrictEqual(logInputs, ['hello']);
     assert.deepStrictEqual(errors, []);
+    assert.equal(exitCode, 0);
   });
 
   it('When count is more than file content', () => {
@@ -47,10 +48,11 @@ describe('headMain', () => {
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
     const args = ['-n', '3', 'a.txt'];
-    headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
 
     assert.deepStrictEqual(logInputs, ['hello\nhi']);
     assert.deepStrictEqual(errors, []);
+    assert.equal(exitCode, 0);
   });
 
   it('Should give specified number of bytes', () => {
@@ -61,9 +63,10 @@ describe('headMain', () => {
     const log = mocklog(logInputs);
     const args = ['-c', '1', 'a.txt'];
 
-    headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
     assert.deepStrictEqual(logInputs, ['h']);
     assert.deepStrictEqual(errors, []);
+    assert.equal(exitCode, 0);
   });
 
   it('Should throw error when file is not found', () => {
@@ -75,9 +78,10 @@ describe('headMain', () => {
     const eLog = mocklog(errors);
     const log = mocklog(logInputs);
 
-    headMain(mockedReadFile, log, eLog, ...args);
+    const exitCode = headMain(mockedReadFile, log, eLog, ...args);
     assert.deepStrictEqual(errors, expectedErr);
     assert.deepStrictEqual(logInputs, []);
+    assert.equal(exitCode, 1);
   });
 
   it('Should throw error if option is invalid', () => {
