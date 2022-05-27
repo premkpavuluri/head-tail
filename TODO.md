@@ -33,8 +33,8 @@
 
 - **TODO**
   - [ ] Refactor `headMain`
-    - [ ] Extract try-catch block.
-    - [ ] Seperate the `head` and `display` responsibility in try-catch
+    - [x] Extract try-catch block.
+    - [x] Seperate the `head` and `display` responsibility in try-catch
 
 <br/>
 
